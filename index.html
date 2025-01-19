@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Morning, Meg!</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="sun"></div>
+    <div class="ewan">Good Morning, Meg!</div>
+    <button class="start-button" onclick="window.location.href='idk.html'" style="display: none; ">start mo hehe</button> <!-- Initially hidden -->
+
+    <script>
+      setTimeout(() => {
+        const overlay = document.querySelector('.overlay');
+        overlay.style.background = 'rgba(0, 0, 0, 0.4)';
+      }, 4000);
+
+      // Show the button after the text finishes typing
+      setTimeout(() => {
+        const button = document.querySelector('.start-button');
+        button.style.display = 'block'; // Show the button
+      }, 8000); // Show the button 8 seconds after the page loads (adjust as needed)
+    </script>
+</body>
+</html>

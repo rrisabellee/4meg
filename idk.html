@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>basta</title>
+</head>
+<body>
+  <div class="video-background">
+    <video autoplay muted loop id="video-bg">
+      <source src="pics/videoplayback.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <div class="walalang"></div>
+  <button id="startButton">click mo para may sound hehe</button>
+  <audio id="audio" src="pics/Lovesong.mp3" loop></audio>
+  
+  <div id="Letter" class="letter" style="display: none;">
+    <h2>Hi, Meg!</h2>
+    <p>i dont know why im making a website at 2:40 in the morning, <br> but pls bare w me this helps me not to overthink things. <br>anw, good morning, meg! pls don't forget to eat bfast po<br> nd pls drink ur meds na if masakit pa ulo mo but hopefully hindi na.<br> ill be running somewhere lng po in the morning but will go home agad after hehe.</p>
+    <div id="finalDisplay" style="display: none;">
+      <div class="text-center">ano gagawin mo po for today? (ss ur answer hehe)</div>
+      <div>
+        <div class="image-square"><img src="pics/aayos.png" alt="Aayos"></div>
+        <div class="image-square"><img src="pics/babantay.png" alt="Babantay"></div>
+        <div class="image-square"><img src="pics/watch alone.png" alt="Watch Alone"></div>
+        <div class="image-square"><img src="pics/wala.png" alt="Wala"></div>
+      </div>
+      <div class="text-center">if wala hehe suggestion: (ss ur answer hehe)</div>
+      <div>
+        <div class="image-square"><img src="pics/watch.png" alt="Watch"></div>
+        <div class="image-square"><img src="pics/play.png" alt="Play"></div>
+        <div class="image-square"><img src="pics/nothing.png" alt="Nothing"></div>
+        <div class="image-square"><img src="pics/la.png" alt="La"></div>
+      </div>
+    </div>
+    
+    <button id="nextButton">Next</button>
+
+  </div>
+
+
+  <script>
+   const letters = [
+  {
+    title: "Hi, Meg!",
+    content: "i dont know why im making a website at 2:40 in the morning, <br> but pls bare w me this helps me not to overthink things. <br>anw, good morning, meg! pls don't forget to eat bfast po<br> nd pls drink ur meds na if masakit pa ulo mo but hopefully hindi na.<br> ill be running somewhere lng po in the morning but will go home agad after hehe."
+  },
+  {
+    title: "hehe",
+    content: "i've been thinking abt ung question mo earlier nd i just want to say na pls don't overthink po cause i will wait, meg. even if i get tired, i can rest namn but no, i wont stop waiting. nd hindi rin me mananawa. I'm not like that, meg. once i like someone, i like someone. I don’t just get bored all of a sudden that's not mabuti. pls know na i will wait for u meg for as long as u need me to. i cant explain it pero super gusto talaga kitaaaa meg walang ibaaa at walang magiging iba pls know that!"
+  },
+  {
+    title: "anw",
+    content: "Monday na bukas makikita na kita yey pero huhu may pasok nanaman:( i know na iniisip mo rin ung pasukan but dw! just like last sem, nasurvive natin, this sem din! also masaya kaklase sila emy nd rhyme always ka may karamay at kakopyahan kaya dw! ik na marami ako nakwento sayo abt sknila na hindi good haha pero they're super nice and fun to be with naman:) if u need any help or need someone to rant to, just mssge me lang po hehe. Good luck, Meg! kaya natin 2 ^_^"
+  },
+  {
+    title: "ano gagawin mo po for today?",
+    content: "(ss ur answer hehe)",
+    images: ["pics/aayos.png", "pics/babantay.png", "pics/watch alone.png", "pics/wala.png"]
+  },
+  {
+    title: "if wala hehe suggestion:",
+    content: "(ss ur answer hehe)",
+    images: ["pics/watch.png", "pics/play.png", "pics/nothing.png", "pics/la.png"]
+  }
+];
+
+let currentLetterIndex = 0;
+
+document.getElementById('startButton').addEventListener('click', function () {
+  const audio = document.getElementById('audio');
+  audio.play();
+
+  document.getElementById('startButton').style.display = 'none';
+  document.getElementById('Letter').style.display = 'block';
+  showLetter();
+});
+
+document.getElementById('nextButton').addEventListener('click', function () {
+  currentLetterIndex++;
+  if (currentLetterIndex < letters.length) {
+    showLetter();
+  } else {
+    document.getElementById('Letter').style.display = 'none';
+    document.getElementById('finalDisplay').style.display = 'flex';
+    document.getElementById('nextButton').style.display = 'none'; // Hide the next button on the last letter
+  }
+});
+
+function showLetter() {
+  const letter = letters[currentLetterIndex];
+  const title = document.querySelector('#Letter h2');
+  const content = document.querySelector('#Letter p');
+  
+
+  title.innerHTML = letter.title;
+  content.innerHTML = letter.content;
+
+  const existingImageContainer = document.querySelector('.image-container');
+  if (existingImageContainer) {
+    existingImageContainer.remove();
+  }
+
+
+  if (letter.images) {
+    const imageContainer = document.createElement('div');
+    imageContainer.classList.add('image-container');
+    
+    letter.images.forEach(imageSrc => {
+      const imgWrapper = document.createElement('div');
+      imgWrapper.classList.add('image-square');
+      const img = document.createElement('img');
+      img.src = imageSrc;
+      imgWrapper.appendChild(img);
+      imageContainer.appendChild(imgWrapper);
+    });
+
+    document.querySelector('#Letter').appendChild(imageContainer);
+  }
+}
+
+  </script>
+</body>
+</html>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body, html {
+    height: 100%;
+    margin: 0;
+  }
+
+  .video-background {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  #video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .walalang {
+    width: 2130px;
+    height: 1100px;
+    background-color: rgba(0, 0, 0, 0.596);
+    position: absolute; 
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);  
+    z-index: 1;  
+  }
+
+  button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 15px;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    font-size: 30px;
+    background-color: #ffbca831;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 2;
+  }
+
+  button:hover {
+    background-color: #ff7f4473;
+  }
+
+  .letter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 124, 72, 0.336);
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 600px;
+    z-index: 3;
+    text-align: center;
+  }
+
+  .letter h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  .letter p {
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  #nextButton {
+    margin-top: 285px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #ff7f44;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  #nextButton:hover {
+    background-color: #ffbda8;
+  }
+
+  #finalDisplay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+  }
+
+  .text-center {
+    font-size: 50px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .image-container img {
+    max-width: 100%;
+    height: auto;
+    margin: 10px;
+  }
+  .image-square {
+    display: inline-block;
+    margin: 10px;
+  }
+
+  .image-square img {
+    max-width: 200px; 
+    max-height: 200px; 
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+  }
+
+</style>
